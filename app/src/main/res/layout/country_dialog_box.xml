@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dialog"
+            type="com.ismailhakkiaydin.coronavirusapp.network.dto.Country" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        app:cardCornerRadius="10dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/quicksand"
+                android:gravity="center"
+                android:text="@{dialog.countryName}"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:gravity="center"
+                android:text="Total Cases Per Minute of Population"
+                android:textColor="@color/colorCases"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="297dp" />
+
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="Cases : "
+                android:textColor="@color/colorCases"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_deaths"
+                app:layout_constraintTop_toTopOf="@+id/tv_deaths" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="Deaths : "
+                android:textColor="@color/colorDeaths"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_cases"
+                app:layout_constraintEnd_toStartOf="@+id/tv_recovered" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="Recovered : "
+                android:textColor="@color/colorRecovered"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_cases"
+                app:layout_constraintEnd_toStartOf="@+id/tv_cases" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="New Cases : "
+                android:textColor="@color/colorCases"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_new_cases"
+                app:layout_constraintEnd_toStartOf="@+id/tv_new_cases" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="New Deaths : "
+                android:textColor="@color/colorDeaths"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_new_deaths"
+                app:layout_constraintEnd_toStartOf="@+id/tv_new_deaths" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="Serious Critical : "
+                android:textColor="@color/colorCritical"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_serious_critical"
+                app:layout_constraintEnd_toStartOf="@+id/tv_serious_critical" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="Active Cases : "
+                android:textColor="@color/colorCases"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_active_cases"
+                app:layout_constraintEnd_toStartOf="@+id/tv_active_cases" />
+
+            <TextView
+                android:id="@+id/tv_cases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.totalRecovered}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_recovered"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recovered" />
+
+            <TextView
+                android:id="@+id/tv_deaths"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.cases}"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                tools:layout_editor_absoluteX="198dp" />
+
+            <TextView
+                android:id="@+id/tv_recovered"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.deaths}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_deaths"
+                app:layout_constraintTop_toBottomOf="@+id/tv_deaths" />
+
+            <TextView
+                android:id="@+id/tv_new_cases"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.newCases}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="@+id/tv_cases"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cases" />
+
+            <TextView
+                android:id="@+id/tv_new_deaths"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.deaths}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintStart_toStartOf="@+id/tv_new_cases"
+                app:layout_constraintTop_toBottomOf="@+id/tv_new_cases" />
+
+            <TextView
+                android:id="@+id/tv_serious_critical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.seriousCritical}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintStart_toStartOf="@+id/tv_new_deaths"
+                app:layout_constraintTop_toBottomOf="@+id/tv_new_deaths" />
+
+            <TextView
+                android:id="@+id/tv_active_cases"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.activeCases}"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_serious_critical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_serious_critical" />
+
+            <TextView
+                android:id="@+id/tv_per_minute"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/quicksand"
+                android:text="@{dialog.totalCasesPer1mPopulation}"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ismailhakkiaydin.coronavirusapp.R;
 import com.ismailhakkiaydin.coronavirusapp.databinding.ActivityMainBinding;
+import com.ismailhakkiaydin.coronavirusapp.databinding.CountryDialogBoxBinding;
+import com.ismailhakkiaydin.coronavirusapp.databinding.CountryListItemBinding;
 import com.ismailhakkiaydin.coronavirusapp.network.client.ApiClient;
 import com.ismailhakkiaydin.coronavirusapp.network.client.ApiService;
 import com.ismailhakkiaydin.coronavirusapp.network.dto.Country;
@@ -47,9 +53,16 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+
         countryAdapter = new CountryAdapter(this, countryList, new ItemClickListener() {
             @Override
             public void onItemClick(Country country, int position) {
+
+                Dialog dialog = new Dialog(getApplicationContext());
+                dialog.show();
+
+
+
                 Toast.makeText(MainActivity.this, "Position " +position, Toast.LENGTH_SHORT).show();
             }
         });

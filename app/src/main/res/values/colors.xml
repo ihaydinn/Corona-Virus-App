@@ -6,6 +6,8 @@
 
     <color name="colorCases">#FF9800</color>
     <color name="colorDeaths">#D80F00</color>
+    <color name="colorRecovered">#4CAF50</color>
+    <color name="colorCritical">#9E0D03</color>
 
 
 </resources>
