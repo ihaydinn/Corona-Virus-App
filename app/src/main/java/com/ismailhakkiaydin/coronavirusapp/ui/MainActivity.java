@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Country country, int position) {
 
-                Dialog dialog = new Dialog(getApplicationContext());
-                dialog.show();
+                CountryDialog countryDialog = new CountryDialog();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("country_detail", country);
+                countryDialog.setArguments(bundle);
+                countryDialog.show(getSupportFragmentManager(), "Country Dialog");
 
-
-
-                Toast.makeText(MainActivity.this, "Position " +position, Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(countryAdapter);

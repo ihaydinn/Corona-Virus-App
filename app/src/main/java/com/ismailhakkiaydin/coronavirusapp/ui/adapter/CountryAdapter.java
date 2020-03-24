@@ -43,8 +43,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
             public void onClick(View v) {
                 mItemClickListener.onItemClick(countryList.get(countryViewHolder.getAdapterPosition()), countryViewHolder.getAdapterPosition());
 
-                Bundle bundle = new Bundle();
-
             }
         });
 
