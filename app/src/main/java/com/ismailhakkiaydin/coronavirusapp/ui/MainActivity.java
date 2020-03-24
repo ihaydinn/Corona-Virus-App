@@ -1,20 +1,23 @@
 package com.ismailhakkiaydin.coronavirusapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.GridLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ismailhakkiaydin.coronavirusapp.R;
+import com.ismailhakkiaydin.coronavirusapp.databinding.ActivityMainBinding;
 import com.ismailhakkiaydin.coronavirusapp.network.client.ApiClient;
 import com.ismailhakkiaydin.coronavirusapp.network.client.ApiService;
 import com.ismailhakkiaydin.coronavirusapp.network.dto.Country;
 import com.ismailhakkiaydin.coronavirusapp.network.dto.CountryResponse;
+import com.ismailhakkiaydin.coronavirusapp.ui.adapter.CountryAdapter;
+import com.ismailhakkiaydin.coronavirusapp.ui.adapter.ItemClickListener;
 
 import java.util.List;
 
@@ -23,20 +26,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    CountryAdapter countryAdapter;
-    List<Country> countryList;
-    RecyclerView recyclerView;
+
+    private CountryAdapter countryAdapter;
+    private List<Country> countryList;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-
+        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
-        GridLayoutManager linearLayoutManager = new GridLayoutManager(this,2);
-        linearLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         ApiService apiService;
@@ -47,8 +50,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
                 countryList = response.body().getCountriesStat();
-                Log.e("ERROR : ", ""+countryList.size());
-                countryAdapter = new CountryAdapter(getApplicationContext(), countryList);
+                Log.e("ERROR : ", "" + countryList.size());
+                countryAdapter = new CountryAdapter(getApplicationContext(), countryList, new ItemClickListener() {
+                    @Override
+                    public void onItemClick(Country country, int position) {
+                        Toast.makeText(MainActivity.this, "Toplam " +countryList.size(), Toast.LENGTH_SHORT).show();
+                    }
+                });
                 recyclerView.setAdapter(countryAdapter);
 
             }

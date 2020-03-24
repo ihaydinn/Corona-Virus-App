@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="country"
             type="com.ismailhakkiaydin.coronavirusapp.network.dto.Country" />
@@ -27,7 +26,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Ulke Adı"
+                android:textSize="20sp"
+                android:fontFamily="@font/quicksand"
+                android:text="@{country.countryName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,11 +38,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="79dp"
                 android:layout_marginBottom="16dp"
-                android:text="Toplam Ölüm"
+                android:text="@{country.deaths}"
+                android:textColor="@color/colorDeaths"
+                android:fontFamily="@font/quicksand"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_toplam_vaka" />
 
@@ -50,9 +51,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="81dp"
-                android:text="Toplam Vaka"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{country.cases}"
+                android:textColor="@color/colorCases"
+                android:fontFamily="@font/quicksand"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/tv_ulke" />
 
@@ -63,7 +64,10 @@
                 android:layout_marginStart="78dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Toplam Ölüm :   "
+                android:text="Total Deaths:   "
+                android:textStyle="bold"
+                android:textColor="@color/colorDeaths"
+                android:fontFamily="@font/quicksand"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_toplam_olum"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +79,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="8dp"
-                android:text="Toplam Vaka :   "
+                android:text="Total Cases :   "
+                android:textColor="@color/colorCases"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/tv_toplam_vaka"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_ulke" />
