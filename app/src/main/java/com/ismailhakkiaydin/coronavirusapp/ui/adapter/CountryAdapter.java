@@ -52,7 +52,15 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryV
 
     @Override
     public int getItemCount() {
-        return countryList.size();
+        if (countryList != null){
+            return countryList.size();
+        }
+        else return 0;
+    }
+
+    public void setCountryList(List<Country> countryList){
+        this.countryList = countryList;
+        notifyDataSetChanged();
     }
 
 
