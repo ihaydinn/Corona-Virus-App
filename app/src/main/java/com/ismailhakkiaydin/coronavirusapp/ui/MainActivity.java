@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Country> countryList;
     private RecyclerView recyclerView;
     private CountryViewModel countryViewModel;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +51,38 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        final SwipeRefreshLayout mSwipeRefreshLayout = activityMainBinding.swipeRefreshLayout;
         RecyclerView recyclerView = activityMainBinding.recyclerView;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         countryViewModel = ViewModelProviders.of(this).get(CountryViewModel.class);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_dark,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                R.color.colorPrimary);
+
+
+        recyclerViewLayout();
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerViewLayout();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 2000);
+            }
+        });
+
 
         countryAdapter = new CountryAdapter(this, countryList, new ItemClickListener() {
             @Override
             public void onItemClick(Country country, int position) {
-
                 CountryDialog countryDialog = new CountryDialog();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("country_detail", country);
@@ -70,12 +94,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(countryAdapter);
 
 
+    }
+
+    private void recyclerViewLayout() {
         countryViewModel.getAllCountry().observe(this, new Observer<List<Country>>() {
             @Override
             public void onChanged(List<Country> countries) {
                 countryAdapter.setCountryList(countries);
             }
         });
-
     }
+
 }
