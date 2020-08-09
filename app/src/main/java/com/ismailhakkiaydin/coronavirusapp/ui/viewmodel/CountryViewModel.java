@@ -1,28 +1,43 @@
 package com.ismailhakkiaydin.coronavirusapp.ui.viewmodel;
 
-import android.app.Application;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-
-import com.ismailhakkiaydin.coronavirusapp.network.dto.Country;
+import com.ismailhakkiaydin.coronavirusapp.network.dto.CountryResponse;
 import com.ismailhakkiaydin.coronavirusapp.repository.CountryRepository;
 
-import java.util.List;
+import javax.inject.Inject;
 
-public class CountryViewModel extends AndroidViewModel {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class CountryViewModel extends ViewModel {
 
-    private CountryRepository countryRepository;
+    private CountryRepository mCountryRepository;
+    private final MutableLiveData<CountryResponse> modelMutableLiveData = new MutableLiveData<>();
 
-    public CountryViewModel(@NonNull Application application) {
-        super(application);
-        countryRepository  = new CountryRepository();
+    @Inject
+    public CountryViewModel(CountryRepository mCountryRepository) {
+        this.mCountryRepository = mCountryRepository;
     }
 
-    public LiveData<List<Country>> getAllCountry(){
-        return countryRepository.getMutableLiveData();
+
+    public MutableLiveData<CountryResponse> getModelMutableLiveData() {
+        mCountryRepository.modelCountry().enqueue(new Callback<CountryResponse>() {
+            @Override
+            public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
+                CountryResponse countryResponse = response.body();
+                getModelMutableLiveData().setValue(countryResponse);
+            }
+
+            @Override
+            public void onFailure(Call<CountryResponse> call, Throwable t) {
+
+            }
+        });
+        return modelMutableLiveData;
     }
+
 
 }

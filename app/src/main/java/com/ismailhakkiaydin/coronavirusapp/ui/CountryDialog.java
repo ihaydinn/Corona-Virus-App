@@ -1,6 +1,5 @@
 package com.ismailhakkiaydin.coronavirusapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
