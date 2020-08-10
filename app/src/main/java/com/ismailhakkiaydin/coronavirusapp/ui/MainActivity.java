@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements HasAndroidInjecto
 
     private CountryAdapter countryAdapter;
     private List<Country> countryList;
-    private RecyclerView recyclerView;
 
     @Inject
     DispatchingAndroidInjector<Object> fragmentDispatchingAndroidInjector;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements HasAndroidInjecto
 
     private CountryViewModel countryViewModel;
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
