@@ -63,6 +63,15 @@ public class MainActivity extends AppCompatActivity implements HasAndroidInjecto
                 android.R.color.holo_orange_dark,
                 R.color.colorPrimary);
 
+        /*
+        countryViewModel.getModelMutableLiveData().observe(this, new Observer<CountryResponse>() {
+            @Override
+            public void onChanged(CountryResponse countryResponse) {
+                countryAdapter.setCountryList(countryResponse.getCountriesStat());
+            }
+        });*/
+
+        countryViewModel.getAllCountries(this);
         countryViewModel.getModelMutableLiveData().observe(this, new Observer<CountryResponse>() {
             @Override
             public void onChanged(CountryResponse countryResponse) {

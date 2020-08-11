@@ -1,12 +1,11 @@
 package com.ismailhakkiaydin.coronavirusapp.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.ismailhakkiaydin.coronavirusapp.network.client.ApiService;
-import com.ismailhakkiaydin.coronavirusapp.network.dto.Country;
+import com.ismailhakkiaydin.coronavirusapp.network.client.data.NetworkBoundResource;
 import com.ismailhakkiaydin.coronavirusapp.network.dto.CountryResponse;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,8 +21,26 @@ public class CountryRepository {
         this.apiService = apiService;
     }
 
+    /*
     public Call<CountryResponse> modelCountry() {
         return apiService.getCountry();
     }
+*/
+    public LiveData<CountryResponse> getCountryList() {
+        return new NetworkBoundResource<CountryResponse>() {
 
+
+            @NonNull
+            @Override
+            protected Call<CountryResponse> createCall() {
+                return apiService.getCountry();
+            }
+
+            @Override
+            protected void onFetchFailed() {
+                super.onFetchFailed();
+            }
+        }.getResultData();
+
+    }
 }
